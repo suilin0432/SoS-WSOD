@@ -1,0 +1,18 @@
+_BASE_: "../Base-RetinaNet.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+  RETINANET:
+#    REG_BRANCH: False
+    NUM_CLASSES: 20
+    NMS_THRESH_TEST: 0.3
+DATASETS:
+  TRAIN: ('voc_2007_trainval',)
+  TEST: ('voc_2007_test',)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.01 # Note that RetinaNet uses a different default learning rate
+  STEPS: (12000, 16000)
+  MAX_ITER: 18000  # 17.4 epochs
+  WARMUP_ITERS: 100
