@@ -9,7 +9,7 @@ This is the official repository of our paper:
 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2022
 
 <p align="center">
-<img src="pipeline.pdf" width="85%">
+<img src="pipeline.jpg" width="85%">
 </p>
 
 
