@@ -14,13 +14,13 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2022
 
 
 
-##### Install
+### Install
 
 Notes:
 
 - As we build our stage 1 model based on UWSOD repo which adopts an earlier detectron2 version, please prepare two different conda environments as follows.
 
-###### Install UWSOD for Stage 1
+#### Install UWSOD for Stage 1
 
 ```
 # create conda environment for Stage 1
@@ -56,7 +56,7 @@ python3 -m pip install -v -e .
 
 
 
-###### Install Detectron2 for Stage 2 & 3
+#### Install Detectron2 for Stage 2 & 3
 
 ```
 # create conda environment for Stage 2 and 3
@@ -77,9 +77,9 @@ python3 -m pip install -v -e .
 
  
 
-##### Prepare Datasets
+### Prepare Datasets
 
-###### PASCAL VOC
+#### PASCAL VOC
 
 1. Download PASCAL VOC Dataset from official website
 
@@ -104,7 +104,7 @@ python3 -m pip install -v -e .
 
 3. Prepare Proposal file following [here](https://github.com/shenyunhang/DRN-WSOD-pytorch/tree/DRN-WSOD/projects/WSL)
 
-###### MS-COCO
+#### MS-COCO
 
 1. Download MS-COCO Dataset from official website
 
@@ -128,11 +128,11 @@ python3 -m pip install -v -e .
 
 
 
-##### Get Started
+### Get Started
 
 We will use VOC2007 as the example.
 
-###### Backbone Preparation
+#### Backbone Preparation
 
 1. Download VGG Backbone from [here](https://1drv.ms/f/s!Am1oWgo9554dgRQ8RE1SRGvK7HW2) following [UWSOD repo](https://github.com/shenyunhang/UWSOD/tree/UWSOD/projects/WSL).
 
@@ -146,7 +146,7 @@ We will use VOC2007 as the example.
 
    
 
-###### Stage 1: WSOD stage
+#### Stage 1: WSOD stage
 
 1. Train a basic WSOD model first:
 
@@ -162,7 +162,7 @@ We will use VOC2007 as the example.
 
    
 
-###### Stage 2: Pseudo-FSOD stage
+#### Stage 2: Pseudo-FSOD stage
 
 1. Generate pseudo labels with PGF
 
@@ -191,7 +191,7 @@ We will use VOC2007 as the example.
 
    
 
-###### Stage 3: SSOD stage
+#### Stage 3: SSOD stage
 
 1. add multi-label messages into pseudo-label annotation files:
 
@@ -233,7 +233,7 @@ We will use VOC2007 as the example.
 
    
 
-##### TTA Test:
+### TTA Test:
 
 1. extract single branch of the model
 
@@ -254,9 +254,9 @@ We will use VOC2007 as the example.
 
    
 
-##### Models
+### Models
 
-###### VOC2007
+#### VOC2007
 
 | stage                                     | $mAP_{50:95}$ | $mAP_{50}$ | $mAP_{75}$ |                          model link                          |
 | ----------------------------------------- | :-----------: | :--------: | :--------: | :----------------------------------------------------------: |
@@ -283,7 +283,7 @@ Note:
 5. VOC2007 Only indicates that in all stages we do not rely on any other datasets besides VOC2007.
 6. COCO Pretrain means we rid of ImageNet dependency and pretrain the model w/ unlabeled MS-COCO in all stages.
 
-###### MS-COCO
+#### MS-COCO
 
 | stage                            | $mAP_{50:95}$ | $mAP_{50}$ | $mAP_{75}$ |                          model link                          |
 | -------------------------------- | :-----------: | :--------: | :--------: | :----------------------------------------------------------: |
@@ -294,9 +294,9 @@ Note:
 
 
 
-##### Inference with Provided Models
+### Inference with Provided Models
 
-###### Stage 1
+#### Stage 1
 
 ```
 python3 projects/WSL/tools/train_net.py \
@@ -307,7 +307,7 @@ MODEL.WEIGHTS ${MODEL_PATH} \
 OUTPUT_DIR ${OUTPUT_DIR} TEST.AUG.ENABLED False
 ```
 
-###### Stage 2 & 3
+#### Stage 2 & 3
 
 ```
 python train_net_test_tta.py \
@@ -318,7 +318,7 @@ MODEL.WEIGHTS ${MODEL_PATH} \
 OUTPUT_DIR ${OUTPUT_DIR} TEST.AUG.ENABLED False
 ```
 
-###### SoS-WSOD+
+#### SoS-WSOD+
 
 1. SoS-WSOD+ w/ unlabeled ImageNet Pretrain
 
@@ -342,14 +342,14 @@ OUTPUT_DIR ${OUTPUT_DIR} TEST.AUG.ENABLED False
    OUTPUT_DIR ${OUTPUT_DIR} TEST.AUG.ENABLED False
    ```
 
-##### Note:
+### Note:
 
 1. For readability and usability, we clean and rewrite our codes. We do evaluate the codebase on VOC2007 and could get comparable or even better performance than results which are reported in our CVPR 2022 paper. However, we do not evaluate on COCO yet.
 2. As we tried, inference result of the provided detector model may have some deviation according to the experiment environment. For example, compared with using the experiment environment with gcc 5, we find a little bit lower performance with gcc 7. Such a phenomenon is founded under both pytorch 1.9.0 and pytorch 1.6.0. But, results obtained by training following the SoS framework from scratch will not be affected.
 
 
 
-##### Acknowledgment
+### Acknowledgment
 
 This code is built upon UWSOD, unbiased-teacher and detectron2, thanks all the contributors of these codebases.
 
@@ -357,7 +357,7 @@ This code is built upon UWSOD, unbiased-teacher and detectron2, thanks all the c
 
 
 
-##### TODO List:
+### TODO List:
 
 1. Evaluate results on MS-COCO.
 2. Salvage of Supervision in Weakly Supervised Instance Segmentation (SoS-WSIS) and Salvage of Supervision in Weakly Supervised Semantic Segmentation  (SoS-WSSS) are coming.
