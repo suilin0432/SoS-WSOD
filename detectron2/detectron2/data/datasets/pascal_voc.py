@@ -87,21 +87,11 @@ def load_voc_instances(dirname: str, split: str, class_names: Union[List[str], T
     return dicts
 
 def load_voc_instances_wsl(dirname: str, split: str, class_names: Union[List[str], Tuple[str, ...]]):
-    # 获取 数据集对应划分(train, val, test) 图片 ids
     with PathManager.open(os.path.join(dirname, "ImageSets", "Main", split + ".txt")) as f:
         fileids = np.loadtxt(f, dtype=np.str)
-    # print(2)
-    # 针对 single-input 的文件
-    # print("load from {}/single_voc07_wsl_{}_contain.json".format(dirname, split))
-    # annotation_wsl = json.load(open(
-    #    "{}/single_voc07_wsl_{}_contain.json".format(dirname, split), "r"
-    # ))
-    # 获取 annotations, wsl 预测之后的结果会保存为 json 的格式
     if "07" in dirname:
         annotation_wsl = json.load(open(
-            # "{}/pseudo_labels/oicr_plus_voc_2007_{}.json".format(dirname, split), "r"
-            "{}/pseudo_labels/voc07_wsl_{}_contain.json".format(dirname, split), "r"
-            # "{}/pseudo_labels/voc_2007_{}.json".format(dirname, split), "r"
+            "{}/pseudo_labels/oicr_plus_voc_2007_{}.json".format(dirname, split), "r"
         ))
     elif "12" in dirname:
         annotation_wsl = json.load(open(
